@@ -1,0 +1,78 @@
+{% extends "sayfalar/layout.html" %}
+{% load i18n %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'sayfalar/css/article.css' %}">
+<link rel="stylesheet" href="{% static 'sayfalar/css/button_press_effect.css' %}">
+<link rel="stylesheet" href="{% static 'sayfalar/css/multiStep.css' %}">
+<script src="{% static 'sayfalar/js/multiStep.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+{% endblock css %}
+
+{% block body %}
+<div class="container-fluid" id="grad1">
+    <div class="row justify-content-center mt-0">
+        <div class="col-11 col-sm-9 col-md-7 col-lg-6 text-center p-0 mt-3 mb-2">
+            <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
+                <h2><strong>Kredi Başvuru Formu</strong></h2>
+                <p style="color:#e8491d">Emeklilere; Kredi Puansız, Sicil Puansız, Ön Ödemesiz Garantili Kredi</p>
+                <small class="text-muted">* alanlar gereklidir.</small>
+                <div class="row">
+                    <div class="col-md-12 mx-0">
+                        <form method="POST" id="msform">{% csrf_token %}
+                            <!-- progressbar -->
+                            <ul id="progressbar">
+                                <li class="active" id="account"><strong>Account</strong></li>
+                                <li id="personal"><strong>Personal</strong></li>
+                                <li id="payment"><strong>Payment</strong></li>
+                                <li id="confirm"><strong>Finish</strong></li>
+                            </ul>
+                            <!-- fieldsets -->
+                            <fieldset>
+                                <div class="form-card">
+                                <h2 class="fs-title">Account Information</h2>
+                                    {{ form.tc|as_crispy_field }}
+                                    {{ form.ad|as_crispy_field }}
+                                    {{ form.soyad|as_crispy_field }}
+                                    {{ form.tel|as_crispy_field }}
+                                </div>
+                                <button class="next action-button"  value="Next Step" >
+                                    Sonraki
+                                </button>
+                                <input type="button" name="next" class="next action-button" value="Sonraki" />
+                            </fieldset>
+                            <fieldset>
+                                <div class="form-card"> 
+                                <h2 class="fs-title">Personal Information</h2>       
+                                    {{ form.maas_banka|as_crispy_field }}
+                                    {{ form.kredi_tutari|as_crispy_field }}
+                                </div>
+                                <button class="previous action-button-previous" name="previous"  type="submit" value="Previous" >
+                                    Önceki
+                                </button>
+                                <input type="button" name="previous" class="previous action-button-previous" value="Previous" /> <input type="button" name="next" class="next action-button" value="Next Step" />
+                            </fieldset>
+                            <fieldset>
+                                <div class="form-card">
+                                <h2 class="fs-title">Payment Information</h2> 
+                                    {{ form.kredi_talebi|as_crispy_field }}
+                                    {{ form.city|as_crispy_field }}
+                                </div>
+                                <input type="button" name="previous" class="previous action-button-previous" value="Previous" /> <button class="button_press_effect" type="submit">
+                                    Gönder
+                                </button>
+                            </fieldset>
+                            <div class="form-group">
+                                <button class="button_press_effect" type="submit">
+                                    Gönder
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}
