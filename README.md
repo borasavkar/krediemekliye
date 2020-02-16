@@ -1,2 +1,3 @@
 "# krediemekliye" 
-"# krediemekliye-django" 
+
+# krediemekliye
